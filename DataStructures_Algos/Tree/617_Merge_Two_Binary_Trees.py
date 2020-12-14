@@ -41,7 +41,6 @@ class Solution:
                     t[0].left = TreeNode(nodeSum(n1, n2))
                     queue.append([t[0].left, n1, n2])
 
-                # right child
                 n1 = t[1].right if t[1] else None
                 n2 = t[2].right if t[2] else None
                 if n1 or n2:

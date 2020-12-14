@@ -63,20 +63,21 @@ class Solution:
         :param sum:
         :return:
         """
-        if root:
-            c = self.help_sum(root, sum)  # start from the root
-            l = self.pathSum(root.left, sum)  # inside the left subtree
-            r = self.pathSum(root.right, sum)  # inside the right subtree
-            return c + l + r
-        return 0
-
-    def help_sum(self, root, sum):
-        if root:
-            l = self.help_sum(root.left, sum - root.val)
-            r = self.help_sum(root.right, sum - root.val)
-            return l + r + (root.val == sum)
-        return 0
-
+        if not root: return 0
+        res = 0
+        stack = [(0, root, 0)]  # (visited, node, cur_sum)
+        d = {0: 1}
+        while stack:
+            seen, node, cursum = stack.pop()
+            if not node: continue
+            if not seen:
+                cursum += node.val
+                res += d.get(cursum - node.val, 0)
+                d[cursum] = d.get(cursum, 0) + 1
+                stack += [(1, node, cursum), (0, node.left, cursum), (0, node.right, cursum)]
+            else:
+                d[cursum] -= 1
+        return res
 
 
 
