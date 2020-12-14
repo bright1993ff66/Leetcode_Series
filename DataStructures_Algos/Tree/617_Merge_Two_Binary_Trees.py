@@ -29,7 +29,7 @@ class Solution:
             return node1.val + node2.val
 
         root = TreeNode(t1.val + t2.val)
-        queue = [[root, t1, t2]]
+        queue = [[root, t1, t2]] # add new root node to the queue
 
         while queue:
             t = queue.pop()
