@@ -52,7 +52,7 @@ class Solution:
 
         return result
 
-    def pathSum(self, root: TreeNode, sum: int) -> int:
+    def pathSum_437(self, root: TreeNode, sum: int) -> int:
         """
         You are given a binary tree in which each node contains an integer value.
         Find the number of paths that sum to a given value.
@@ -64,20 +64,16 @@ class Solution:
         :return:
         """
         if not root: return 0
-        res = 0
-        stack = [(0, root, 0)]  # (visited, node, cur_sum)
-        d = {0: 1}
-        while stack:
-            seen, node, cursum = stack.pop()
-            if not node: continue
-            if not seen:
-                cursum += node.val
-                res += d.get(cursum - node.val, 0)
-                d[cursum] = d.get(cursum, 0) + 1
-                stack += [(1, node, cursum), (0, node.left, cursum), (0, node.right, cursum)]
-            else:
-                d[cursum] -= 1
+        res = self.pathSumFromRoot(root, sum) + self.pathSum_437(root.left, sum) + self.pathSum_437(root.right, sum)
         return res
+
+    def pathSumFromRoot(self, root_node, sum_val):
+        if not root_node: return 0
+        result = 0
+        if root_node.val == sum_val: result += 1
+        result += self.pathSumFromRoot(root_node.left, sum_val - root_node.val) + \
+               self.pathSumFromRoot(root_node.right, sum_val - root_node.val)
+        return result
 
 
 
