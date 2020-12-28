@@ -39,7 +39,7 @@ class Trie:
 
             cur = cur.children[letter]
 
-        return cur.word
+        return cur.word # Check whether the pointer reaches the end
 
     def startsWith(self, prefix: str) -> bool:
         """
@@ -53,4 +53,5 @@ class Trie:
 
             cur = cur.children[letter]
 
-        return cur.word or len(cur.children) > 0
+        return cur.word or len(cur.children) > 0 # Check whether the pointer reaches the end (when the prefix is
+        # actually a word) or the Trie contains that prefix)
