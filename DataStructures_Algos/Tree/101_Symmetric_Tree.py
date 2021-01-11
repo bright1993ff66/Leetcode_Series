@@ -15,9 +15,8 @@ class Solution:
         if not root: return True
         stack = [root]
         while len(stack):
-            temp = []
-            comp = []
-            size  = len(stack)
+            temp, comp = [], []
+            size = len(stack)
             for _ in range(size):
                 top = stack.pop()
                 if top.left: temp.append(top.left)
